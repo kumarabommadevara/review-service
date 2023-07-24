@@ -6,11 +6,13 @@ import com.harsha.reviewservice.repository.ReviewRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
+@EnableDiscoveryClient
 public class ReviewServiceApplication implements CommandLineRunner {
 
 
