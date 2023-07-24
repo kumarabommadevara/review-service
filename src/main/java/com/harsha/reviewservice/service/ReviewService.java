@@ -25,4 +25,17 @@ public class ReviewService {
                     return  review1;
                 }).collect(Collectors.toList());
     }
+
+    public List<ReviewVM> getReviewsByInstructorId(String instructorID)
+    {
+        final List<Review> reviews = repository.getReviewDetailsByInstructorId(instructorID);
+        return reviews.stream().map(review ->
+        {
+            ReviewVM review1=new ReviewVM();
+            review1.setReviewDetails(review.getReviewDetails());
+            review1.setInstructorId(review.getInstructorId());
+            return  review1;
+        }).collect(Collectors.toList());
+    }
+
 }
