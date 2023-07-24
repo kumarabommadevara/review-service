@@ -11,15 +11,10 @@ import java.util.List;
 
 @Getter
 @Setter
-@Entity
-@Table(name = "reviews")
 @ToString
-@NoArgsConstructor
-public class Review {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int reviewId;
-    @OneToMany(mappedBy = "review",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+
+public class ReviewVM {
+
     private List<ReviewDetails> reviewDetails=new ArrayList<>();
     private String instructorId;
 }

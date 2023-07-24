@@ -1,8 +1,9 @@
 package com.harsha.reviewservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -10,14 +11,15 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "review_details")
-@ToString
+@NoArgsConstructor
 public class ReviewDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private int reviewDetialsId;
+    private int reviewDetialsId;
     private String comment;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "review_id")
     private Review review;
 

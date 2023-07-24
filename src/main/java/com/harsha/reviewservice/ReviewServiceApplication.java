@@ -2,9 +2,7 @@ package com.harsha.reviewservice;
 
 import com.harsha.reviewservice.model.Review;
 import com.harsha.reviewservice.model.ReviewDetails;
-import com.harsha.reviewservice.repository.ReviewDetailsRepository;
 import com.harsha.reviewservice.repository.ReviewRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,10 +15,8 @@ public class ReviewServiceApplication implements CommandLineRunner {
 
 
 	private final ReviewRepository repository;
-	private final ReviewDetailsRepository reviewDetailsRepository;
 
-	public ReviewServiceApplication(ReviewRepository repository,ReviewDetailsRepository reviewDetailsRepository) {
-		this.reviewDetailsRepository=reviewDetailsRepository;
+	public ReviewServiceApplication(ReviewRepository repository) {
 		this.repository = repository;
 	}
 
@@ -31,21 +27,46 @@ public class ReviewServiceApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
+	saveReviews();
+
+	}
+	public void saveReviews()
+	{
 		List<ReviewDetails> detailsList=new ArrayList<>();
+
 		ReviewDetails details=new ReviewDetails();
 		details.setComment("Excellent i love his teaching");
-		details.setComment("GOOD");
 		detailsList.add(details);
 
+		ReviewDetails details1=new ReviewDetails();
+		details1.setComment("good");
+		detailsList.add(details1);
+
+
+		ReviewDetails details2=new ReviewDetails();
+		details2.setComment("good very good");
+
+		detailsList.add(details2);
 
 		Review review=new Review();
 		review.setReviewDetails(detailsList);
-		review.setInstructorId("1");
 		details.setReview(review);
+		details2.setReview(review);
+		details1.setReview(review);
+		review.setInstructorId("1");
+
 
 		repository.save(review);
-		reviewDetailsRepository.save(details);
 
+		List<ReviewDetails> detailsList1=new ArrayList<>();
+		ReviewDetails detailsSai=new ReviewDetails();
+		detailsSai.setComment("not good");
+		detailsList1.add(detailsSai);
 
+		Review reviewSai=new Review();
+		reviewSai.setReviewDetails(detailsList1);
+		detailsSai.setReview(reviewSai);
+		reviewSai.setInstructorId("2");
+		repository.save(reviewSai);
 	}
 }
